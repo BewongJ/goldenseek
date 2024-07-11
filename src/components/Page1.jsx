@@ -1,5 +1,5 @@
-import React, { useMemo, useState, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { useMemo, useState, Suspense, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, useProgress } from '@react-three/drei';
 import { TextureLoader } from 'three';
 import Loading from './Loading'; // Import the Loading component
@@ -8,7 +8,6 @@ import Loading from './Loading'; // Import the Loading component
 const models = ['./golden/babyblue.glb', './golden/almond.glb', './golden/babypink.glb'];
 const colors = ['#89cff0', '#EED9C4', '#F4C2C2'];
 
-// Preload all models using useGLTF.preload
 models.forEach((model) => {
   useGLTF.preload(model);
 });
@@ -16,7 +15,15 @@ models.forEach((model) => {
 // Functional component for the 3D model
 const Model = ({ modelPath }) => {
   const { scene } = useGLTF(modelPath);
-  return <primitive object={scene} scale={0.15} position={[0, 2, -5]} />;
+  const modelRef = useRef();
+
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.y += 0.01; // Adjust rotation speed as needed
+    }
+  });
+
+  return <primitive ref={modelRef} object={scene} scale={0.15} position={[0, 2, -5]} />;
 };
 
 const Page1 = () => {
@@ -42,8 +49,8 @@ const Page1 = () => {
             rotateSpeed={0.5}
             enableDamping={true}
             dampingFactor={0.25}
-            minDistance={0.5} // Adjusted for deeper zoom
-            maxDistance={30} // Adjusted for more freedom
+            minDistance={0.5} 
+            maxDistance={30} 
             target={[0, 1.9, 0]}
           />
 
