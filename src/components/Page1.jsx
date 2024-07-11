@@ -19,7 +19,7 @@ const Model = ({ modelPath }) => {
 
   useFrame(() => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.01; // Adjust rotation speed as needed
+      modelRef.current.rotation.y += 0.005; // Adjust rotation speed as needed
     }
   });
 
