@@ -37,13 +37,13 @@ const Page1 = () => {
         <Canvas camera={{ position: [0, 1.9, 10], fov: 60 }}>
           <OrbitControls
             enableZoom={true}
-            enablePan={false}
+            enablePan={true}
             zoomSpeed={0.5}
             rotateSpeed={0.5}
             enableDamping={true}
             dampingFactor={0.25}
-            minDistance={5}
-            maxDistance={20}
+            minDistance={0.5} // Adjusted for deeper zoom
+            maxDistance={30} // Adjusted for more freedom
             target={[0, 1.9, 0]}
           />
 
