@@ -26,7 +26,7 @@ const Model = ({ modelPath }) => {
   return <primitive ref={modelRef} object={scene} scale={0.15} position={[0, 2, -5]} />;
 };
 
-const Page1 = () => {
+const Models1 = () => {
   const [currentModel, setCurrentModel] = useState(models[0]);
 
   const wallTexture = useMemo(() => new TextureLoader().load('textures/1.png'), []);
@@ -96,4 +96,4 @@ const Page1 = () => {
   );
 };
 
-export default Page1;
+export default Models1;
