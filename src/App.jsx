@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import Models1 from './components/Models1';
-import Models2 from './components/Models2'
+import Models2 from './components/Models2';
 
 function App() {
-  const [showModel, setShowModel] = useState(false);
-  const [showAnotherModel, setShowAnotherModel] = useState(false);
+  const [activeModel, setActiveModel] = useState(null);
 
-  const toggleModel = () => {
-    setShowModel(!showModel);
+  const toggleModel1 = () => {
+    setActiveModel(activeModel === 'model1' ? null : 'model1');
   };
 
-  const toggleAnotherModel = () => {
-    setShowAnotherModel(!showAnotherModel);
+  const toggleModel2 = () => {
+    setActiveModel(activeModel === 'model2' ? null : 'model2');
   };
 
   return (
@@ -21,26 +20,26 @@ function App() {
       </div>
       <div className="flex justify-between items-center mt-4 px-10">
         <button
-          onClick={toggleModel}
+          onClick={toggleModel1}
           className="bg-yellow-500 text-white font-bold py-2 px-4 rounded"
         >
-          {showModel ? 'Hide Model' : 'Candy Top'}
+          {activeModel === 'model1' ? 'Hide Model' : 'Candy Top'}
         </button>
         <button
-          onClick={toggleAnotherModel}
+          onClick={toggleModel2}
           className="bg-yellow-500 text-white font-bold py-2 px-4 rounded"
         >
-          {showAnotherModel ? 'Hide Model' : 'Test'}
+          {activeModel === 'model2' ? 'Hide Model' : 'Test'}
         </button>
       </div>
-      {showModel && (
+      {activeModel === 'model1' && (
         <div className="mt-4">
-          <Models1/>
+          <Models1 />
         </div>
       )}
-      {showAnotherModel && (
+      {activeModel === 'model2' && (
         <div className="mt-4">
-          <Models2/>
+          <Models2 />
         </div>
       )}
     </div>
