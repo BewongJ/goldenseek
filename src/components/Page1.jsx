@@ -45,8 +45,8 @@ const Page1 = () => {
           <OrbitControls
             enableZoom={true}
             enablePan={true}
-            zoomSpeed={0.5}
-            rotateSpeed={0.5}
+            zoomSpeed={0.8}
+            rotateSpeed={0.7}
             enableDamping={true}
             dampingFactor={0.25}
             minDistance={0.5} 
