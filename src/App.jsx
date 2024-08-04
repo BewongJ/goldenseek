@@ -16,21 +16,12 @@ function App() {
 
   return (
     <div className="bg-black min-h-screen">
-      <div className="navbar bg-white w-100 h-10 flex justify-center items-center text-black font-mono text-2xl">
-        <img src="/images/2.png" alt="logo" className="h-12" />
-      </div>
-      <div className="flex justify-between items-center mt-4 px-10">
+      <div className="flex justify-between items-center px-10">
         <button
           onClick={toggleModel1}
-          className="bg-white text-black font-bold py-2 px-4 rounded"
+          className="bg-white text-black font-bold py-2 px-4 mt-5 rounded"
         >
           {activeModel === 'model1' ? <FaEyeSlash /> : 'Candy Top'}
-        </button>
-        <button
-          onClick={toggleModel2}
-          className="bg-white text-black font-bold py-2 px-4 rounded"
-        >
-          {activeModel === 'model2' ? <FaEyeSlash /> : 'Test'}
         </button>
       </div>
       {activeModel === 'model1' && (
