@@ -86,7 +86,7 @@ const Models1 = () => {
             <button
               key={index}
               onClick={() => changeModel(model)}
-              className={`w-12 h-12 rounded-full text-xl`}
+              className={`w-12 h-12 rounded-full text-xl transition-transform duration-300 transform hover:scale-110 active:scale-90`}
               style={{ backgroundColor: colors[index] }}
             />
           ))}

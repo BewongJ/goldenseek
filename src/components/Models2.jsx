@@ -6,7 +6,7 @@ import Loading from './Loading'; // Import the Loading component
 
 // Preload all optimized models
 const models = ['./golden/babyblue.glb', './golden/almond.glb', './golden/babypink.glb'];
-const colors = ['#89cff0', 'red', '#F4C2C2'];
+const colors = ['#89cff0', '#EED9C4', '#F4C2C2'];
 
 models.forEach((model) => {
   useGLTF.preload(model);
@@ -26,7 +26,7 @@ const Model = ({ modelPath }) => {
   return <primitive ref={modelRef} object={scene} scale={0.15} position={[0, 2, -5]} />;
 };
 
-const Models2 = () => {
+const Models1 = () => {
   const [currentModel, setCurrentModel] = useState(models[0]);
 
   const wallTexture = useMemo(() => new TextureLoader().load('textures/1.png'), []);
@@ -86,7 +86,7 @@ const Models2 = () => {
             <button
               key={index}
               onClick={() => changeModel(model)}
-              className={`w-12 h-12 rounded-full text-xl`}
+              className={`w-12 h-12 rounded-full text-xl transition-transform duration-300 transform hover:scale-110 active:scale-90`}
               style={{ backgroundColor: colors[index] }}
             />
           ))}
@@ -96,4 +96,4 @@ const Models2 = () => {
   );
 };
 
-export default Models2;
+export default Models1;
