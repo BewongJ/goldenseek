@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Models1 from './components/Models1';
 import Models2 from './components/Models2';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEyeSlash } from 'react-icons/fa';
 
 function App() {
   const [activeModel, setActiveModel] = useState(null);
@@ -16,13 +16,20 @@ function App() {
 
   return (
     <div className="bg-black min-h-screen">
-      <div className="flex justify-between items-center px-10">
+      <br></br>
+      <div className="flex justify-between items-center px-10 mx-0">
         <button
           onClick={toggleModel1}
-          className="bg-white text-black font-bold py-2 px-4 mt-5 rounded"
+          className="bg-white text-black font-bold py-2 px-4 rounded"
         >
           {activeModel === 'model1' ? <FaEyeSlash /> : 'Candy Top'}
         </button>
+        {/* <button
+          onClick={toggleModel2}
+          className="bg-white text-black font-bold py-2 px-4 rounded"
+        >
+          {activeModel === 'model2' ? <FaEyeSlash /> : 'GDS Polo'}
+        </button> */}
       </div>
       {activeModel === 'model1' && (
         <div className="mt-4">

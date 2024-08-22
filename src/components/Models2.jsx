@@ -5,8 +5,8 @@ import { TextureLoader } from 'three';
 import Loading from './Loading'; // Import the Loading component
 
 // Preload all optimized models
-const models = ['./golden/babyblue.glb', './golden/almond.glb', './golden/babypink.glb'];
-const colors = ['#89cff0', '#EED9C4', '#F4C2C2'];
+const models = ['./golden/GDSPoloBlack.glb', './golden/GDSPoloCream.glb', ];
+const colors = ['black', '#EED9C4',];
 
 models.forEach((model) => {
   useGLTF.preload(model);
@@ -19,7 +19,7 @@ const Model = ({ modelPath }) => {
 
   useFrame(() => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.005; // Adjust rotation speed as needed
+      modelRef.current.rotation.y += 0.002; // Adjust rotation speed as needed
     }
   });
 

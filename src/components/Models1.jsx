@@ -1,6 +1,6 @@
 import React, { useMemo, useState, Suspense, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF, useProgress } from '@react-three/drei';
+import { OrbitControls, useGLTF, useProgress, SpotLight } from '@react-three/drei';
 import { TextureLoader } from 'three';
 import Loading from './Loading'; // Import the Loading component
 
@@ -19,7 +19,7 @@ const Model = ({ modelPath }) => {
 
   useFrame(() => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.005; // Adjust rotation speed as needed
+      modelRef.current.rotation.y += 0.002; // Adjust rotation speed as needed
     }
   });
 
@@ -75,6 +75,17 @@ const Models1 = () => {
             <boxGeometry args={[3, 3.5, 3]} />
             <meshStandardMaterial color="black" />
           </mesh>
+
+          {/* Spotlight targeting the model */}
+          <SpotLight
+            position={[0, 10, -5]} // Adjust position above the model
+            angle={30} // Cone angle of the spotlight
+            penumbra={2} // Softness of the spotlight edges
+            intensity={100} // Intensity of the spotlight
+            distance={450} // How far the spotlight reaches
+            castShadow // Enable shadows for more realistic lighting
+            target-position={[0, 2, -5]} // Targeting the model position
+          />
 
           <Suspense fallback={null}>
             <Model modelPath={currentModel} />
