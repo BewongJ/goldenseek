@@ -46,7 +46,7 @@ const Models2 = () => {
 
   // โหลดพื้นผิวของผนัง
   const wallTexture = useMemo(
-    () => new TextureLoader().load(""),
+    () => new TextureLoader().load("textures/1.png"),
     []
   );
 
