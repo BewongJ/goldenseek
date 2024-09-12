@@ -110,7 +110,7 @@ const Models2 = () => {
 
           {/* SpotLight */}
           <SpotLight
-            position={[0, 10, -5]}
+            position={[0, 12, -5]}
             angle={30}
             penumbra={2}
             intensity={100}
