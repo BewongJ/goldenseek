@@ -56,7 +56,7 @@ const Models2 = () => {
   );
 
   const handleButtonClick = () => {
-    window.location.href = "https://s.shopee.co.th/6fO0mhr0ra";
+    window.location.href = "https://s.shopee.co.th/g7DU7x0hO";
   };
 
   // ฟังก์ชันสำหรับเปลี่ยนโมเดล
