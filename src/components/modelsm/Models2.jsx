@@ -34,7 +34,7 @@ const Model = ({ modelPath }) => {
     <primitive
       ref={modelRef}
       object={scene}
-      scale={0.15}
+      scale={0.12}
       position={[0, 2, -5]}
     />
   );
