@@ -34,7 +34,7 @@ const Model = ({ modelPath }) => {
     <primitive
       ref={modelRef}
       object={scene}
-      scale={0.12}
+      scale={0.15}
       position={[0, 2, -5]}
     />
   );
@@ -43,6 +43,7 @@ const Model = ({ modelPath }) => {
 // Component หลักสำหรับแสดงผลโมเดลและการควบคุม
 const Models2 = () => {
   const [currentModel, setCurrentModel] = useState(models[0]);
+  const [showModal, setShowModal] = useState(false); // state for modal
 
   // โหลดพื้นผิวของผนัง
   const wallTexture = useMemo(
@@ -50,18 +51,38 @@ const Models2 = () => {
     []
   );
 
+  // โหลดพื้นผิวของปุ่ม
   const buttonTexture = useMemo(
-    () => new TextureLoader().load("textures/SHOP_NOW_1.png"),
+    () => new TextureLoader().load("textures/shop.png"),
     []
   );
 
-  const handleButtonClick = () => {
-    window.location.href = "https://s.shopee.co.th/g7DU7x0hO";
-  };
+  const buttonTexture1 = useMemo(
+    () => new TextureLoader().load("textures/gift.png"),
+    []
+  );
 
   // ฟังก์ชันสำหรับเปลี่ยนโมเดล
   const changeModel = (model) => {
     setCurrentModel(model);
+  };
+
+  // ฟังก์ชันสำหรับการคลิกปุ่ม
+  const handleButtonClick = () => {
+    window.location.href = "https://s.shopee.co.th/g7DU7x0hO";
+  };
+
+  const handleButtonClick1 = () => {
+    setShowModal(true); // เปิด modal เมื่อคลิก
+  };
+
+  const handleSaveClick = () => {
+    const link = document.createElement("a");
+    link.href = "textures/voucher.png"; // เปลี่ยนลิงก์รูปภาพที่ต้องการให้บันทึก
+    link.download = "voucher.png"; // ชื่อไฟล์ที่จะบันทึก
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const { active } = useProgress();
@@ -70,12 +91,12 @@ const Models2 = () => {
     <div className="h-screen bg-black flex flex-col justify-center items-center">
       <div className="relative w-full h-full">
         {active && <Loading />}
-        <Canvas camera={{ position: [0, 1.9, 10], fov: 60 }}>
+        <Canvas camera={{ position: [0, 2.0, 10], fov: 40 }}>
           <OrbitControls
             enableZoom={true}
             enablePan={true}
-            zoomSpeed={0.8}
-            rotateSpeed={0.7}
+            zoomSpeed={1}
+            rotateSpeed={0.8}
             enableDamping={true}
             dampingFactor={0.25}
             minDistance={0.5}
@@ -108,20 +129,11 @@ const Models2 = () => {
             <meshStandardMaterial color="black" />
           </mesh>
 
-          {/* SpotLight */}
-          <SpotLight
-            position={[0, 12, -5]}
-            angle={30}
-            penumbra={2}
-            intensity={100}
-            distance={450}
-            castShadow
-            target-position={[0, 2, -5]}
-          />
+          {/* ปุ่มที่มีภาพ */}
 
           <mesh
             position={[0, 1, -3.4]}
-            onClick={handleButtonClick} // จัดการการคลิกปุ่ม
+            onClick={handleButtonClick} // จัดการการคลิกปุ่ม เปิด modal
             className="cursor-pointer"
             scale={[1, 1, 1]} // ขนาดเริ่มต้น
             onPointerOver={(e) => e.object.scale.set(1.1, 1.1, 1.1)} // ขยายเมื่อชี้เมาส์
@@ -132,6 +144,31 @@ const Models2 = () => {
             <planeGeometry args={[2, 0.5]} />
             <meshStandardMaterial map={buttonTexture} />
           </mesh>
+
+          <mesh
+            position={[0, 0.4, -3.4]}
+            onClick={handleButtonClick1} // จัดการการคลิกปุ่ม เปิด modal
+            className="cursor-pointer"
+            scale={[1, 1, 1]} // ขนาดเริ่มต้น
+            onPointerOver={(e) => e.object.scale.set(1.1, 1.1, 1.1)} // ขยายเมื่อชี้เมาส์
+            onPointerOut={(e) => e.object.scale.set(1, 1, 1)} // กลับขนาดปกติเมื่อไม่ชี้เมาส์
+            onPointerDown={(e) => e.object.scale.set(0.9, 0.9, 0.9)} // ย่อขนาดเมื่อคลิก
+            onPointerUp={(e) => e.object.scale.set(1.1, 1.1, 1.1)} // ขยายอีกครั้งหลังจากคลิก
+          >
+            <planeGeometry args={[2, 0.5]} />
+            <meshStandardMaterial map={buttonTexture1} />
+          </mesh>
+
+          {/* SpotLight */}
+          <SpotLight
+            position={[0, 10, -5]}
+            angle={30}
+            penumbra={2}
+            intensity={100}
+            distance={450}
+            castShadow
+            target-position={[0, 2, -5]}
+          />
 
           <Suspense fallback={null}>
             <Model modelPath={currentModel} />
@@ -149,6 +186,34 @@ const Models2 = () => {
             />
           ))}
         </div>
+
+        {/* Modal สำหรับแสดงผลรูปภาพ */}
+        {showModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-4 rounded-lg shadow-lg">
+              <h2 className="text-lg font-semibold mb-2">GIFT VOUCHER</h2>
+              <img
+                src="textures/voucher.png"
+                alt="voucher"
+                className="w-auto h-[300px] mb-4"
+              />
+              <div className="flex justify-between">
+                <button
+                  onClick={handleSaveClick}
+                  className="bg-black text-white py-2 px-4 rounded-md"
+                >
+                  Save Image
+                </button>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="bg-red-500 text-white py-2 px-4 rounded-md"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
